@@ -2,6 +2,7 @@
 import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import css from 'rollup-plugin-import-css';
+import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'MyInstrument.tsx',
@@ -9,5 +10,14 @@ export default {
     dir: 'build',
     format: 'es'
   },
-  plugins: [css({ output: 'MyInstrument.css' }), resolve(), typescript()]
+  plugins: [
+    css({ output: 'MyInstrument.css' }), 
+    resolve(), 
+    typescript(),
+    copy({
+      targets: [
+        { src: '*.html', dest: 'build'}
+      ]
+    })
+  ]
 }
