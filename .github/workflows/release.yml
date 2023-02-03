@@ -29,3 +29,14 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Package release files
+        uses: montudor/action-zip@v1
+        args: zip -qq -r vatsim-atis.zip build
+
+      - name: Attach output to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        files: |
+          vatsim-atis.zip
