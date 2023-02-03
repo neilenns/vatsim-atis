@@ -1,2 +1,5 @@
 # vatsim-atis
-MSFS 2020 avionics plug-in to get ATIS information from VATSIM
+
+Eventually this will be a plug-in that retrieves and displays ATIS information from VATSIM.
+
+For now it's just a sample project with automated builds.
