@@ -1,22 +1,28 @@
 import { FSComponent, Subject } from 'msfssdk';
 import { MyComponent } from './MyComponent';
-import Vatsim from 'node-vatsim';
+import type Server from 'node-vatsim/Server';
 
 class MyInstrument extends BaseInstrument {
   override get templateID(): string {
     return 'MyInstrument';
   }
 
-  public override async connectedCallback(): Promise<void> {
+  public override connectedCallback(): void {
     super.connectedCallback();
 
-    const atis = Subject.create<string>('');
-    FSComponent.render(<MyComponent atis={atis}/>, document.getElementById('InstrumentContent'));
+    const atis = Subject.create<string>('Hello world');
+    FSComponent.render(<MyComponent atis={atis} />, document.getElementById('InstrumentContent'));
 
-    var vatsim = new Vatsim();
-    await vatsim.GetV3Data();
-
-    atis.set(vatsim.Data?.PublishedATIS?.[0]?.Text || '');
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://status.vatsim.net/status.json", true);
+    xhr.responseType = "json";
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        const data = xhr.response as Server;
+        console.log(data);
+      }
+    };
+    xhr.send();
   }
 }
 

@@ -5,7 +5,6 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import css from 'rollup-plugin-import-css';
 import copy from 'rollup-plugin-copy';
-import commonjs from '@rollup/plugin-commonjs';
 
 export default {
   input: 'MyInstrument.tsx',
@@ -16,7 +15,6 @@ export default {
   plugins: [
     css({ output: 'MyInstrument.css' }), 
     resolve(), 
-    commonjs(),
     typescript(),
     copy({
       targets: [
