@@ -2,7 +2,9 @@
 {
   "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM"],
+    "lib": ["DOM", "es2017"],
+    "target": "es2017", /* Specifies the ES2017 target, compatible with Coherent GT */
+    "module": "es2015", /* Ensures that modules are at least es2015 */
     "incremental": true, /* Enables incremental builds */
     "outDir": "build", /* Sets the output folder to ./build */
     "jsxFactory": "FSComponent.buildComponent", /* Required for FSComponent framework JSX */
