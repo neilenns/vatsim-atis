@@ -1,4 +1,4 @@
-interface ATIS {
+export default interface ATIS {
   /**
    * ICAO for the airport reporting the ATIS information.
    */
